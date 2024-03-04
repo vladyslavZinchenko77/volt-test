@@ -2,21 +2,29 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addTodo, toggleTodo, TodoFilter } from '../redux/todosSlice';
 import { RootState } from '../redux/store';
-import { Empty } from 'antd';
+import { Empty, Alert, Space } from 'antd';
 import { CheckOutlined, StopOutlined } from '@ant-design/icons';
 
 import './ToDoList.scss';
 
 const ToDoList = () => {
   const [newToDo, setNewToDo] = useState('');
+  const [error, setError] = useState('');
+
   const todos = useSelector((state: RootState) => state.todos.todos);
   const filter = useSelector((state: RootState) => state.todos.filter);
   const dispatch = useDispatch();
 
   const handleAddToDo = () => {
-    if (newToDo.trim().length < 20) {
-      dispatch(addTodo(newToDo.trim()));
+    const trimmedTodo = newToDo.trim();
+    if (trimmedTodo.length === 0) {
+      setError('Task cannot be empty!!!');
+    } else if (trimmedTodo.length > 20) {
+      setError('Task length should be less than or equal to 20 characters!!!');
+    } else {
+      dispatch(addTodo(trimmedTodo));
       setNewToDo('');
+      setError('');
     }
   };
 
@@ -45,6 +53,7 @@ const ToDoList = () => {
   return (
     <>
       <h1 className="todolist__title">To Do List</h1>
+
       <input
         className="todolist__input"
         type="text"
@@ -52,10 +61,24 @@ const ToDoList = () => {
         value={newToDo}
         onChange={(e) => setNewToDo(e.target.value)}
       />
+
+      <Space direction="vertical" style={{ maxWidth: 280 }}>
+        {error && (
+          <Alert
+            message={error}
+            type="warning"
+            style={{ marginTop: 8 }}
+            closable
+          />
+        )}
+      </Space>
+
       <button className="todolist__btn primary" onClick={handleAddToDo}>
         Add task
       </button>
+
       <h2 className="todolist__title">My tasks:</h2>
+
       <div className="todolist__counter">
         <p className="todolist__counter-item">
           <StopOutlined style={{ fontSize: 24, color: 'red' }} /> Active:
@@ -66,6 +89,7 @@ const ToDoList = () => {
           {completeTasksCount}
         </p>
       </div>
+
       <div className="todolist__filters">
         <button
           className="todolist__btn secondary"
@@ -86,6 +110,7 @@ const ToDoList = () => {
           Not Completed Only
         </button>
       </div>
+
       {filteredTodos.length === 0 ? (
         <Empty style={{ marginTop: 24 }} />
       ) : (
