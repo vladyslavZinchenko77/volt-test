@@ -7,6 +7,12 @@ import { CheckOutlined, StopOutlined } from '@ant-design/icons';
 
 import './ToDoList.scss';
 
+interface Todo {
+  id: string;
+  text: string;
+  completed: boolean;
+}
+
 const ToDoList = () => {
   const [newToDo, setNewToDo] = useState('');
   const [error, setError] = useState('');
@@ -36,7 +42,7 @@ const ToDoList = () => {
     dispatch({ type: 'todos/setFilter', payload: filter });
   };
 
-  const filteredTodos = todos.filter((todo) => {
+  const filteredTodos = todos.filter((todo: Todo) => {
     if (filter === TodoFilter.All) {
       return true;
     } else if (filter === TodoFilter.Completed) {
@@ -46,7 +52,9 @@ const ToDoList = () => {
     }
   });
 
-  const completeTasksCount = todos.filter((todo) => todo.completed).length;
+  const completeTasksCount = todos.filter(
+    (todo: Todo) => todo.completed
+  ).length;
 
   const activeTasksCount = todos.length - completeTasksCount;
 
@@ -115,7 +123,7 @@ const ToDoList = () => {
         <Empty style={{ marginTop: 24 }} />
       ) : (
         <ul className="todolist__list">
-          {filteredTodos.map((todo) => (
+          {filteredTodos.map((todo: Todo) => (
             <li
               className="todolist__list-item"
               key={todo.id}
