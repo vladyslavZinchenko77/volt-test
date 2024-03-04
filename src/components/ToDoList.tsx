@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addTodo, toggleTodo, TodoFilter } from '../redux/todosSlice';
 import { RootState } from '../redux/store';
+import { Empty } from 'antd';
+import { CheckOutlined, StopOutlined } from '@ant-design/icons';
 
 import './ToDoList.scss';
 
@@ -42,7 +44,7 @@ const ToDoList = () => {
 
   return (
     <>
-      <h1 className="todolist__title-main">To Do List</h1>
+      <h1 className="todolist__title">To Do List</h1>
       <input
         className="todolist__input"
         type="text"
@@ -50,35 +52,58 @@ const ToDoList = () => {
         value={newToDo}
         onChange={(e) => setNewToDo(e.target.value)}
       />
-      <button className="todolist__btn" onClick={handleAddToDo}>
+      <button className="todolist__btn primary" onClick={handleAddToDo}>
         Add task
       </button>
-      <h2 className="todolist__title-secondary">My tasks:</h2>
-      <div>
-        <p>Active tasks: {activeTasksCount}</p>
-        <p>Complete tasks: {completeTasksCount}</p>
+      <h2 className="todolist__title">My tasks:</h2>
+      <div className="todolist__counter">
+        <p>
+          <StopOutlined style={{ fontSize: 24, color: 'red' }} /> Active:
+          {activeTasksCount}
+        </p>
+        <p>
+          <CheckOutlined style={{ fontSize: 24, color: 'green' }} /> Complete:
+          {completeTasksCount}
+        </p>
       </div>
       <div>
-        <button onClick={() => handleFilterChange(TodoFilter.All)}>All</button>
-        <button onClick={() => handleFilterChange(TodoFilter.Completed)}>
+        <button
+          className="todolist__btn secondary"
+          onClick={() => handleFilterChange(TodoFilter.All)}
+        >
+          All
+        </button>
+        <button
+          className="todolist__btn secondary"
+          onClick={() => handleFilterChange(TodoFilter.Completed)}
+        >
           Completed Only
         </button>
-        <button onClick={() => handleFilterChange(TodoFilter.Active)}>
+        <button
+          className="todolist__btn secondary"
+          onClick={() => handleFilterChange(TodoFilter.Active)}
+        >
           Not Completed Only
         </button>
       </div>
-      <ul className="todolist__list">
-        {filteredTodos.map((todo) => (
-          <li
-            className="todolist__list-item"
-            key={todo.id}
-            onClick={() => handleToogleTodo(todo.id)}
-            style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
-          >
-            {todo.text}
-          </li>
-        ))}
-      </ul>
+      {filteredTodos.length === 0 ? (
+        <Empty style={{ marginTop: 24 }} />
+      ) : (
+        <ul className="todolist__list">
+          {filteredTodos.map((todo) => (
+            <li
+              className="todolist__list-item"
+              key={todo.id}
+              onClick={() => handleToogleTodo(todo.id)}
+              style={{
+                textDecoration: todo.completed ? 'line-through' : 'none',
+              }}
+            >
+              {todo.text}
+            </li>
+          ))}
+        </ul>
+      )}
     </>
   );
 };
