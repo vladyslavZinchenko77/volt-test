@@ -1,30 +1,54 @@
-# React + TypeScript + Vite
+<h1>ToDo List Application</h1>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The ToDo List application is a simple task management tool built with React, Redux, and Ant Design. It allows users to add, complete, and filter tasks, as well as view the counts of active and completed tasks.
 
-Currently, two official plugins are available:
+<h2>Features</h2>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Add new tasks with a maximum length of 20 characters
+- Toggle task completion status by clicking on the task text
+- Filter tasks by status (All, Completed, Active)
+- View the count of active and completed tasks
+- Error and success notifications using Ant Design's Alert component
 
-## Expanding the ESLint configuration
+<h2>Installation</h2>
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+To install and run the application locally, follow these steps:
 
-- Configure the top-level `parserOptions` property like this:
+Clone the repository:
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+git clone https://github.com/vladyslavZinchenko77/volt-test
+Navigate to the project directory:
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+cd todo-list-app
+Install the dependencies:
+
+npm install
+Start the development server:
+
+npm start
+The application should now be running at http://localhost:5173/.
+
+<h2>Usage</h2>
+
+Adding a new task: Enter the task text in the input field and click the "Add task" button. If the task text is empty or longer than 20 characters, an error alert will be displayed.
+Completing a task: Click on the task text to toggle its completion status. Completed tasks will have a line-through style.
+Filtering tasks: Use the "All", "Completed Only", and "Not Completed Only" buttons to filter the tasks by their completion status.
+Viewing task counts: The counts of active and completed tasks are displayed above the task list.
+
+<h2>Project Structure</h2>
+The project structure is organized as follows:
+
+components/ToDoList.tsx: The main component that renders the ToDo List application.
+redux/store.ts: The Redux store configuration.
+redux/todosSlice.ts: The Redux slice for managing the todo list state.
+App.tsx: The root component that provides the Redux store context.
+index.tsx: The entry point of the application.
+
+<h2>Dependencies</h2>
+The application uses the following dependencies:
+
+- React
+- Redux
+- React-Redux
+- Ant Design
+- ant-design/icons
