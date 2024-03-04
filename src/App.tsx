@@ -1,5 +1,13 @@
+import ToDoList from './components/ToDoList';
+
+import './styles/App.scss';
+
 function App() {
-  return <>app</>;
+  return (
+    <div className="app">
+      <ToDoList />
+    </div>
+  );
 }
 
 export default App;

@@ -1,0 +1,86 @@
+@import "../styles/variables.scss";
+
+.todolist__title{
+    margin-top: 24px;
+    color: $text-color;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  
+    
+}
+
+.todolist__counter{
+    margin: 24px 0 24px;
+    min-width: 280px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @media screen and (max-width: $mobile-max) {
+      flex-direction: column;
+      .todolist__counter-item{
+        margin-top: 8px;
+      }
+    }
+}
+
+.todolist__input{
+    margin-top: 24px;
+    border: 1px solid $primary-color;
+    border-radius: $border-radius;
+    box-shadow: 0 0 5px rgba($primary-color, 0.3);
+    padding: 8px 12px;
+    font-size: 16px;
+    transition: box-shadow 0.3s ease;
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 8px rgba($primary-color, 0.6);
+      }
+    
+      &::placeholder {
+        color: lighten($text-color, 30%);
+      }
+}
+
+
+.todolist__filters{
+  display: flex;
+  justify-content: space-between;
+  @media screen and (max-width: $mobile-max) {
+    flex-direction: column;
+  }
+}
+
+.todolist__btn{
+  margin-top: 24px;
+  border: none;
+  border-radius: $border-radius;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+  }
+
+  &.primary {
+
+    background-color: $primary-color;
+    color: #fff;
+  }
+
+  &.secondary {
+    margin: 8px;
+    background-color: $secondary-color;
+    color: #fff;
+  }
+}
+
+.todolist__list{
+    margin-top: 12px;
+    .todolist__list-item{
+        cursor: pointer;
+    }
+}
