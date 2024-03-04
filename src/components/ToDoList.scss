@@ -15,6 +15,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    @media screen and (max-width: $mobile-max) {
+      flex-direction: column;
+      .todolist__counter-item{
+        margin-top: 8px;
+      }
+    }
 }
 
 .todolist__input{
@@ -33,6 +39,15 @@
       &::placeholder {
         color: lighten($text-color, 30%);
       }
+}
+
+
+.todolist__filters{
+  display: flex;
+  justify-content: space-between;
+  @media screen and (max-width: $mobile-max) {
+    flex-direction: column;
+  }
 }
 
 .todolist__btn{

@@ -57,16 +57,16 @@ const ToDoList = () => {
       </button>
       <h2 className="todolist__title">My tasks:</h2>
       <div className="todolist__counter">
-        <p>
+        <p className="todolist__counter-item">
           <StopOutlined style={{ fontSize: 24, color: 'red' }} /> Active:
           {activeTasksCount}
         </p>
-        <p>
+        <p className="todolist__counter-item">
           <CheckOutlined style={{ fontSize: 24, color: 'green' }} /> Complete:
           {completeTasksCount}
         </p>
       </div>
-      <div>
+      <div className="todolist__filters">
         <button
           className="todolist__btn secondary"
           onClick={() => handleFilterChange(TodoFilter.All)}
