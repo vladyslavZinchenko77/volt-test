@@ -36,6 +36,10 @@ const ToDoList = () => {
     }
   });
 
+  const completeTasksCount = todos.filter((todo) => todo.completed).length;
+
+  const activeTasksCount = todos.length - completeTasksCount;
+
   return (
     <>
       <h1 className="todolist__title-main">To Do List</h1>
@@ -50,6 +54,10 @@ const ToDoList = () => {
         Add task
       </button>
       <h2 className="todolist__title-secondary">My tasks:</h2>
+      <div>
+        <p>Active tasks: {activeTasksCount}</p>
+        <p>Complete tasks: {completeTasksCount}</p>
+      </div>
       <div>
         <button onClick={() => handleFilterChange(TodoFilter.All)}>All</button>
         <button onClick={() => handleFilterChange(TodoFilter.Completed)}>
